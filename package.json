@@ -1,0 +1,9 @@
+{
+  "name": "acento",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "devDependencies": {
+    "hyperframes": "0.9.81"
+  }
+}
