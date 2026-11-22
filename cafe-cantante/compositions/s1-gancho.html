@@ -1,0 +1,30 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s1-h1 { position: absolute; left: 64px; top: 470px; font-size: 124px; white-space: nowrap; }
+    #s1-h2 { position: absolute; left: 60px; top: 600px; font-size: 140px; white-space: nowrap; }
+    #s1-card { left: 64px; top: 800px; width: 952px; height: 440px; }
+    #s1-img { object-position: 50% 45%; }
+    #s1-credit { left: 64px; top: 1254px; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1080" data-height="1920">
+    <div id="s1-h1" class="sans clip" data-start="0" data-duration="3.751">El flamenco,</div>
+    <div id="s1-h2" class="emo red clip" data-start="0" data-duration="3.751">sin escenario.</div>
+    <div id="s1-card" class="card cut23 clip" data-start="0" data-duration="3.751">
+      <div id="s1-rv" class="rv"><img id="s1-img" src="assets/v3/b-full.jpg" alt="Un café cantante en Sevilla hacia 1885: cantaoras, bailaora y guitarrista en el tablao; el público en las mesas" /></div>
+    </div>
+    <div id="s1-credit" class="credit clip" data-start="0" data-duration="3.751">Café cantante, Sevilla, h. 1885 · Emilio Beauchy</div>
+  </div>
+  <script>
+    (function () {
+      var A = window.Acento;
+      var tl = gsap.timeline({ paused: true });
+      // Frame 0 is the thumbnail: the hook line is already there.
+      A.reveal(tl, "#s1-rv", 0.667);
+      tl.fromTo("#s1-img", { scale: 1.12 }, { scale: 1.0, duration: 3.0, ease: "sine.out" }, 0.667);
+      A.write(tl, "#s1-credit", 1.333);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s1"] = tl;
+    })();
+  </script>
+</template>

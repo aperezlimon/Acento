@@ -55,6 +55,19 @@ def groups(text):
     return [" ".join(r).replace("\u00a0", " ") for r in merged]
 
 
+KEYWORDS = ["cafés cantantes", "Silverio Franconetti", "Antonio Chacón", "Edad de Oro", "calle Rosario", "Lorca", "1881", "1889", "escenario", "vacía", "Andalucía", "cante"]
+
+
+def mark(text):
+    """Put the first brand keyword of a caption group in red (one per group)."""
+    low = text.lower()
+    for k in KEYWORDS:
+        i = low.find(k.lower())
+        if i >= 0:
+            return text[:i] + '<span class="kw">' + text[i:i + len(k)] + "</span>" + text[i + len(k):]
+    return text
+
+
 def main():
     t = json.loads((ROOT / "timings.json").read_text())
     dur = t["duration"]
@@ -84,15 +97,16 @@ def main():
     for i, (s, d, g) in enumerate(items):
         rows.append(
             f'    <div id="cap-{i+1:02d}" class="cap clip" data-start="{s}" data-duration="{d}">'
-            f'<span class="cap-t">{html.escape(g)}</span></div>'
+            f'<span class="cap-t">{mark(html.escape(g))}</span></div>'
         )
     doc = f"""<template>
   <style>
     #root {{ position: absolute; inset: 0; overflow: hidden; pointer-events: none; }}
-    /* Bottom of the Reels safe band: the caption's bottom edge sits at y 1240. */
-    .cap {{ position: absolute; left: 120px; width: 768px; top: 1120px; height: 120px; display: flex; align-items: flex-end; justify-content: center; }}
-    .cap-t {{ display: inline-block; padding: 10px 20px 8px; background: rgba(17, 17, 17, 0.86); color: #f2ece0;
-      font-family: "Montserrat"; font-weight: 600; font-size: 40px; line-height: 1.16; text-align: center; }}
+    /* Brand subtitle plate (brand book §18): noche at 55 %, radius 14, cal Bold, one keyword in red. */
+    .cap {{ position: absolute; left: 64px; width: 952px; top: 1290px; height: 150px; display: flex; align-items: flex-end; justify-content: center; }}
+    .cap-t {{ display: inline-block; padding: 12px 24px 12px; background: rgba(20, 17, 16, 0.55); border-radius: 14px; color: #f4eee6;
+      font-family: "Instrument Sans"; font-weight: 700; font-size: 54px; letter-spacing: -0.02em; line-height: 1.12; text-align: center; }}
+    .kw {{ color: #d8231a; }}
   </style>
   <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
 {chr(10).join(rows)}

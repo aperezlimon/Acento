@@ -1,0 +1,22 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    /* Brand transition: a red band leaning at 23° crosses the frame in two beats, centred on the cut. */
+    .wp { position: absolute; left: -560px; top: -1040px; width: 2200px; height: 4000px; background: var(--acento-rojo); }
+  </style>
+  <div id="root" data-composition-id="wipes" data-width="1080" data-height="1920">
+    <div id="wp1" class="wp clip" data-start="9.069" data-duration="0.667"></div>
+    <div id="wp2" class="wp clip" data-start="42.775" data-duration="0.667"></div>
+    <div id="wp3" class="wp clip" data-start="61.066" data-duration="0.667"></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+      [["#wp1", 9.069], ["#wp2", 42.775], ["#wp3", 61.066]].forEach(function (w) {
+        tl.fromTo(w[0], { x: -2500, rotation: 23 }, { x: 2500, rotation: 23, duration: 0.667, ease: "power2.inOut" }, w[1]);
+      });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["wipes"] = tl;
+    })();
+  </script>
+</template>

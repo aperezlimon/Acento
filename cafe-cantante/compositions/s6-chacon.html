@@ -1,47 +1,41 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
-    #s6-pic { left: 0; top: 300px; width: 1080px; height: 820px; }
-    #s6-img { left: -612px; top: -1101px; width: 2458px; height: 1920px; }
-    #s6-box { left: 96px; top: 318px; width: 760px; height: 112px; }
-    #s6-head { left: 124px; top: 336px; font-size: 64px; white-space: nowrap; }
-    #s6-marks { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
-    #s6-t { left: 600px; top: 520px; }
-    #s6-nbox { left: 96px; top: 800px; width: 820px; height: 250px; }
-    #s6-nkicker { left: 130px; top: 832px; }
-    #s6-name { left: 130px; top: 884px; font-size: 92px; white-space: nowrap; }
+    #s6-hero { position: absolute; left: 0; width: 1080px; top: 410px; text-align: center; font-size: 96px; color: var(--acento-cal); }
+    #s6-card { left: 190px; top: 540px; width: 700px; height: 630px; }
+    #s6-card2 { left: 64px; top: 420px; width: 952px; height: 544px; }
+    #s6-pill { left: 640px; top: 900px; background: var(--acento-rojo); }
+    #s6-name { position: absolute; left: 64px; top: 1010px; font-size: 96px; white-space: nowrap; }
+    #s6-name .emo { font-size: 108px; }
+    #s6-dates { position: absolute; left: 66px; top: 1132px; }
   </style>
   <div id="root" data-composition-id="s6" data-width="1080" data-height="1920">
-    <div id="s6-pic" class="pic clip" data-start="0" data-duration="7.281">
-      <img id="s6-img" src="assets/v2/beauchy.jpg" alt="El público de un café cantante sevillano, detalle de la fotografía de Emilio Beauchy" />
+    <div id="s6-hero" class="emo clip" data-start="0" data-duration="3.6">las grandes figuras</div>
+    <div id="s6-card" class="card cut23 clip" data-start="0" data-duration="3.9">
+      <div id="s6-rv" class="rv"><img src="assets/v3/b-guitarra.jpg" alt="Un guitarrista y cantaoras en el tablao, detalle de la fotografía de Emilio Beauchy" /></div>
     </div>
-    <svg id="s6-marks" class="clip" data-start="0" data-duration="7.281" viewBox="0 0 1080 1920" aria-hidden="true">
-      <ellipse id="s6-ring" cx="640" cy="700" rx="330" ry="150" fill="none" stroke="#f2c230" stroke-width="7" transform="rotate(-3 640 700)" />
-    </svg>
-    <div id="s6-box" class="box clip" data-start="0" data-duration="7.281"></div>
-    <div id="s6-head" class="head clip" data-start="0" data-duration="7.281">Las <span id="s6-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">grandes figuras</span></span></div>
-    <div id="s6-t" class="tag clip" data-start="0" data-duration="7.281">El público</div>
-    <div id="s6-nbox" class="box clip" data-start="0" data-duration="7.281"></div>
-    <div id="s6-nkicker" class="kicker clip" data-start="0" data-duration="7.281">Jerez, 1869 – Madrid, 1929</div>
-    <div id="s6-name" class="head clip" data-start="0" data-duration="7.281"><span id="s6-nmk" class="mk"><span class="mk-bar"></span><span class="mk-t">Antonio Chacón</span></span></div>
+    <div id="s6-card2" class="card clip" data-start="3.6" data-duration="3.681">
+      <div id="s6-rv2" class="rv"><img id="s6-img2" src="assets/v3/b-publico.jpg" alt="El público de un café cantante, detalle de la fotografía de Emilio Beauchy" /></div>
+    </div>
+    <span id="s6-pill" class="pill clip" data-start="3.6" data-duration="3.681">el público</span>
+    <div id="s6-name" class="sans clip" data-start="0" data-duration="7.281">Antonio <span class="emo red">Chacón</span></div>
+    <div id="s6-dates" class="lbl clip" data-start="0" data-duration="7.281">Jerez, 1869 · Madrid, 1929</div>
   </div>
   <script>
     (function () {
-      var E = window.Ed, F = E.F;
-      var scope = document.querySelector('[data-composition-id="s6"]');
+      var A = window.Acento, F = A.F;
       var tl = gsap.timeline({ paused: true });
-      // Along the tables of the café, toward the audience.
-      E.drift(tl, "#s6-img", { x: 0, scale: 1.0, transformOrigin: "50% 75%" }, { x: 200, scale: 1.06 }, 0, 7.28);
-      E.wipe(tl, ["#s6-box", "#s6-head"], 0.1, 12 * F);
       // "Por su café pasaron las grandes figuras del cante."
-      E.mark(tl, "#s6-mk", 1.6);
-      // "Y entre el público..."
-      E.draw(tl, scope.querySelector("#s6-ring"), 3.8);
-      E.tag(tl, "#s6-t", 4.0);
-      // "...un joven Antonio Chacón." (no photo of him in the café exists: his name, not a face)
-      E.wipe(tl, "#s6-nbox", 5.1, 7 * F);
-      E.wipe(tl, ["#s6-nkicker", "#s6-name"], 5.15, 12 * F);
-      E.mark(tl, "#s6-nmk", 5.8);
+      A.reveal(tl, "#s6-rv", 0.0);
+      tl.fromTo("#s6-rv img", { scale: 1.1 }, { scale: 1.0, duration: 3.6, ease: "sine.inOut" }, 0);
+      A.write(tl, "#s6-hero", 0.667, 12 * F);
+      // "Y entre el público..." (the audience as a whole: no one in the photo is named)
+      A.reveal(tl, "#s6-rv2", 3.667);
+      tl.fromTo("#s6-img2", { scale: 1.12 }, { scale: 1.0, duration: 3.6, ease: "sine.out" }, A.snap(3.667));
+      A.enter(tl, "#s6-pill", 4.333);
+      // "...un joven Antonio Chacón."
+      A.write(tl, "#s6-name", 5.333, 16 * F);
+      A.write(tl, "#s6-dates", 6.333);
       window.__timelines = window.__timelines || {};
       window.__timelines["s6"] = tl;
     })();

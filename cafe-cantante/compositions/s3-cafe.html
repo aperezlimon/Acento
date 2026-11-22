@@ -1,48 +1,46 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
-    #s3-pic { left: 0; top: 300px; width: 1080px; height: 844px; }
-    #s3-img { left: 0; top: 0; width: 1080px; height: 844px; }
-    #s3-box { left: 96px; top: 318px; width: 780px; height: 112px; }
-    #s3-head { left: 124px; top: 336px; width: 740px; font-size: 64px; white-space: nowrap; }
+    #s3-hero { position: absolute; left: 0; width: 1080px; top: 410px; text-align: center; font-size: 100px; }
+    #s3-card { left: 64px; top: 540px; width: 952px; height: 744px; border-radius: 28px; }
+    #s3-img { object-position: 50% 50%; }
     #s3-marks { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
-    #s3-t-mesas { left: 150px; top: 930px; }
-    #s3-t-tablao { left: 120px; top: 770px; }
-    #s3-t-publico { left: 560px; top: 1000px; }
+    #s3-p1 { left: 120px; top: 1250px; }
+    #s3-p3 { left: 120px; top: 960px; }
+    #s3-p4 { left: 590px; top: 1250px; background: var(--acento-rojo); }
   </style>
   <div id="root" data-composition-id="s3" data-width="1080" data-height="1920">
-    <div id="s3-pic" class="pic clip" data-start="0" data-duration="8.043">
-      <img id="s3-img" src="assets/v2/beauchy.jpg" alt="Interior de un café cantante sevillano hacia 1885, fotografía de Emilio Beauchy" />
+    <div id="s3-hero" class="emo clip" data-start="0" data-duration="8.043">los cafés cantantes</div>
+    <div id="s3-card" class="card clip" data-start="0" data-duration="8.043">
+      <div id="s3-rv" class="rv"><img id="s3-img" src="assets/v3/b-full.jpg" alt="Interior de un café cantante sevillano hacia 1885, fotografía de Emilio Beauchy" /></div>
     </div>
     <svg id="s3-marks" class="clip" data-start="0" data-duration="8.043" viewBox="0 0 1080 1920" aria-hidden="true">
-      <ellipse id="s3-ring-mesas" cx="250" cy="1052" rx="120" ry="70" fill="none" stroke="#f2c230" stroke-width="7" transform="rotate(-6 250 1052)" />
-      <path id="s3-line-tablao" d="M110 872 L 1000 872" fill="none" stroke="#f2c230" stroke-width="7" stroke-linecap="round" />
-      <ellipse id="s3-ring-publico" cx="760" cy="960" rx="230" ry="110" fill="none" stroke="#f2c230" stroke-width="7" transform="rotate(4 760 960)" />
+      <ellipse id="s3-r1" cx="370" cy="1160" rx="120" ry="72" fill="none" stroke="#D8231A" stroke-width="6" />
+      <path id="s3-l1" d="M70 1041 L 1010 1041" fill="none" stroke="#D8231A" stroke-width="6" stroke-linecap="round" />
+      <ellipse id="s3-r2" cx="780" cy="1140" rx="210" ry="100" fill="none" stroke="#D8231A" stroke-width="6" />
     </svg>
-    <div id="s3-box" class="box clip" data-start="0" data-duration="8.043"></div>
-    <div id="s3-head" class="head clip" data-start="0" data-duration="8.043">Los <span id="s3-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">cafés cantantes</span></span></div>
-    <div id="s3-t-mesas" class="tag clip" data-start="0" data-duration="8.043">Mesas y copas</div>
-    <div id="s3-t-tablao" class="tag clip" data-start="0" data-duration="8.043">El tablao</div>
-    <div id="s3-t-publico" class="tag clip" data-start="0" data-duration="8.043">Público que paga</div>
+    <span id="s3-p1" class="pill clip" data-start="0" data-duration="8.043">mesas y copas</span>
+    <span id="s3-p3" class="pill clip" data-start="0" data-duration="8.043">el tablao</span>
+    <span id="s3-p4" class="pill clip" data-start="0" data-duration="8.043">público que paga</span>
   </div>
   <script>
     (function () {
-      var E = window.Ed, F = E.F;
+      var A = window.Acento, F = A.F;
       var scope = document.querySelector('[data-composition-id="s3"]');
+      function draw(el, t) { var L = el.getTotalLength(); tl.fromTo(el, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 12 * F, ease: "power2.inOut" }, A.snap(t)); }
       var tl = gsap.timeline({ paused: true });
-      // Music breath: from the dancers on the stage, the camera pulls back to the whole café.
-      E.drift(tl, "#s3-img", { scale: 1.55, transformOrigin: "46% 42%" }, { scale: 1.0 }, 0, 2.2);
-      E.wipe(tl, ["#s3-box", "#s3-head"], 1.2, 12 * F);
-      // "Hasta que llegaron los cafés cantantes"
-      E.mark(tl, "#s3-mk", 2.55);
-      // "...mesas, copas, un tablao"
-      E.draw(tl, scope.querySelector("#s3-ring-mesas"), 3.55);
-      E.tag(tl, "#s3-t-mesas", 3.7);
-      E.draw(tl, scope.querySelector("#s3-line-tablao"), 4.45, 12 * F);
-      E.tag(tl, "#s3-t-tablao", 4.6);
+      // Music breath after the red wipe: from the dancers, the camera pulls back to the whole café.
+      tl.fromTo("#s3-img", { scale: 1.7, transformOrigin: "44% 42%" }, { scale: 1.0, duration: 2.4, ease: "power3.inOut" }, 0.2);
+      // "Hasta que llegaron los cafés cantantes:"
+      A.write(tl, "#s3-hero", 2.333, 12 * F);
+      // "...mesas, copas, un tablao..."
+      draw(scope.querySelector("#s3-r1"), 3.667);
+      A.enter(tl, "#s3-p1", 3.667);
+      draw(scope.querySelector("#s3-l1"), 4.333);
+      A.enter(tl, "#s3-p3", 4.333);
       // "...y un público que pagaba por escuchar."
-      E.draw(tl, scope.querySelector("#s3-ring-publico"), 6.0);
-      E.tag(tl, "#s3-t-publico", 6.2);
+      draw(scope.querySelector("#s3-r2"), 6.0);
+      A.enter(tl, "#s3-p4", 6.333);
       window.__timelines = window.__timelines || {};
       window.__timelines["s3"] = tl;
     })();

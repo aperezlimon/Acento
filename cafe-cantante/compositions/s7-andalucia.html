@@ -1,49 +1,46 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
+    #s7-hero { position: absolute; left: 0; width: 1080px; top: 410px; text-align: center; font-size: 104px; }
     #s7-map { position: absolute; left: 90px; top: 520px; width: 900px; height: 560px; }
-    #s7-pins { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
-    .s7-city { position: absolute; font: 600 34px/1 var(--font-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-paper); white-space: nowrap; }
-    #s7-l-sev { left: 350px; top: 760px; }
-    #s7-l-jer { left: 150px; top: 896px; }
-    #s7-l-cad { left: 170px; top: 990px; }
-    #s7-l-mal { left: 590px; top: 940px; }
-    #s7-kicker { left: 120px; top: 318px; }
-    #s7-head { left: 120px; top: 372px; font-size: 100px; white-space: nowrap; }
-    #s7-credit { left: 120px; top: 498px; font-size: 28px; }
+    .s7-pin { position: absolute; width: 44px; height: 44px; }
+    #s7-p-sev { left: 309px; top: 762px; }
+    #s7-p-jer { left: 286px; top: 896px; }
+    #s7-p-cad { left: 263px; top: 926px; }
+    #s7-p-mal { left: 548px; top: 889px; }
+    .s7-city { position: absolute; font: 600 30px/1 var(--acento-font-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--acento-cal); white-space: nowrap; }
+    #s7-l-sev { left: 352px; top: 760px; }
+    #s7-l-jer { left: 140px; top: 880px; }
+    #s7-l-cad { left: 150px; top: 966px; }
+    #s7-l-mal { left: 592px; top: 892px; }
+    #s7-huella { left: 288px; top: 1150px; }
   </style>
   <div id="root" data-composition-id="s7" data-width="1080" data-height="1920">
-    <img id="s7-map" class="clip" data-start="0" data-duration="6.079" src="assets/v2/andalucia.svg" alt="Mapa de las provincias de Andalucía" />
-    <svg id="s7-pins" class="clip" data-start="0" data-duration="6.079" viewBox="0 0 1080 1920" aria-hidden="true">
-      <circle id="s7-p-sev" cx="325" cy="799" r="15" fill="#f2c230" stroke="#111" stroke-width="5" />
-      <circle id="s7-p-jer" cx="302" cy="933" r="13" fill="#f2c230" stroke="#111" stroke-width="5" />
-      <circle id="s7-p-cad" cx="279" cy="963" r="13" fill="#f2c230" stroke="#111" stroke-width="5" />
-      <circle id="s7-p-mal" cx="564" cy="926" r="13" fill="#f2c230" stroke="#111" stroke-width="5" />
-    </svg>
+    <div id="s7-hero" class="emo alb clip" data-start="0" data-duration="6.079">la Edad de Oro</div>
+    <img id="s7-map" class="clip" data-start="0" data-duration="6.079" src="assets/v3/andalucia.svg" alt="Mapa de las provincias de Andalucía" />
+    <img id="s7-p-sev" class="s7-pin clip" data-start="0" data-duration="6.079" src="assets/brand/simbolo_rojo.svg" alt="" />
+    <img id="s7-p-jer" class="s7-pin clip" data-start="0" data-duration="6.079" src="assets/brand/simbolo_cal.svg" alt="" />
+    <img id="s7-p-cad" class="s7-pin clip" data-start="0" data-duration="6.079" src="assets/brand/simbolo_cal.svg" alt="" />
+    <img id="s7-p-mal" class="s7-pin clip" data-start="0" data-duration="6.079" src="assets/brand/simbolo_cal.svg" alt="" />
     <div id="s7-l-sev" class="s7-city clip" data-start="0" data-duration="6.079">Sevilla</div>
     <div id="s7-l-jer" class="s7-city clip" data-start="0" data-duration="6.079">Jerez</div>
     <div id="s7-l-cad" class="s7-city clip" data-start="0" data-duration="6.079">Cádiz</div>
     <div id="s7-l-mal" class="s7-city clip" data-start="0" data-duration="6.079">Málaga</div>
-    <div id="s7-kicker" class="kicker clip" data-start="0" data-duration="6.079">Andalucía</div>
-    <div id="s7-head" class="head clip" data-start="0" data-duration="6.079">La <span id="s7-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">Edad de Oro</span></span></div>
-    <div id="s7-credit" class="credit clip" data-start="0" data-duration="6.079">Algunas ciudades con cafés cantantes</div>
+    <div id="s7-huella" class="huella clip" data-start="0" data-duration="6.079"><span class="hb t"></span><span class="hb t"></span><span class="hb acc"><svg viewBox="20 10 64 80"><path d="M 38.88 85.81 L 74.43 29.18 A 13.5 13.5 0 1 0 49.96 18.52 L 32.71 83.12 A 3.4 3.4 0 0 0 38.88 85.81 Z" fill="#F4EEE6"/></svg></span><span class="hb t"></span><span class="hb t"></span><span class="hb acc"><svg viewBox="20 10 64 80"><path d="M 38.88 85.81 L 74.43 29.18 A 13.5 13.5 0 1 0 49.96 18.52 L 32.71 83.12 A 3.4 3.4 0 0 0 38.88 85.81 Z" fill="#F4EEE6"/></svg></span><span class="hb t"></span><span class="hb acc"><svg viewBox="20 10 64 80"><path d="M 38.88 85.81 L 74.43 29.18 A 13.5 13.5 0 1 0 49.96 18.52 L 32.71 83.12 A 3.4 3.4 0 0 0 38.88 85.81 Z" fill="#F4EEE6"/></svg></span><span class="hb t"></span><span class="hb acc"><svg viewBox="20 10 64 80"><path d="M 38.88 85.81 L 74.43 29.18 A 13.5 13.5 0 1 0 49.96 18.52 L 32.71 83.12 A 3.4 3.4 0 0 0 38.88 85.81 Z" fill="#F4EEE6"/></svg></span><span class="hb t"></span><span class="hb acc"><svg viewBox="20 10 64 80"><path d="M 38.88 85.81 L 74.43 29.18 A 13.5 13.5 0 1 0 49.96 18.52 L 32.71 83.12 A 3.4 3.4 0 0 0 38.88 85.81 Z" fill="#D8231A"/></svg></span></div>
   </div>
   <script>
     (function () {
-      var E = window.Ed, F = E.F;
+      var A = window.Acento, F = A.F;
       var tl = gsap.timeline({ paused: true });
-      E.wipe(tl, "#s7-map", 0, 14 * F);
-      E.drift(tl, "#s7-map", { scale: 1.0, transformOrigin: "35% 60%" }, { scale: 1.06 }, 0, 6.08);
-      E.wipe(tl, ["#s7-kicker", "#s7-credit"], 0.3);
-      // "Los cafés se extendieron por Andalucía."
-      var pins = [["#s7-p-sev", "#s7-l-sev", 0.9], ["#s7-p-jer", "#s7-l-jer", 1.5], ["#s7-p-cad", "#s7-l-cad", 1.95], ["#s7-p-mal", "#s7-l-mal", 2.5]];
-      pins.forEach(function (p) {
-        tl.fromTo(p[0], { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 7 * F, ease: "back.out(2.2)" }, p[2]);
-        E.wipe(tl, p[1], p[2] + 3 * F, 8 * F);
+      A.reveal(tl, "#s7-map", 0.333, 3 * A.BEAT);
+      // "Los cafés se extendieron por Andalucía." The cities land on the accents.
+      [["#s7-p-sev", "#s7-l-sev", 1.0], ["#s7-p-jer", "#s7-l-jer", 1.667], ["#s7-p-cad", "#s7-l-cad", 2.0], ["#s7-p-mal", "#s7-l-mal", 2.667]].forEach(function (p) {
+        tl.fromTo(p[0], { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 6 * F, ease: "power3.in" }, A.snap(p[2]));
+        A.write(tl, p[1], p[2] + 0.2, 8 * F);
       });
-      // "Fue la Edad de Oro del flamenco."
-      E.wipe(tl, "#s7-head", 3.5, 12 * F);
-      E.mark(tl, "#s7-mk", 4.1);
+      // "Fue la Edad de Oro del flamenco." One compás is played out under the map.
+      A.huella(tl, "#s7-huella", 1.667);
+      A.write(tl, "#s7-hero", 3.667, 12 * F);
       window.__timelines = window.__timelines || {};
       window.__timelines["s7"] = tl;
     })();

@@ -1,0 +1,16 @@
+:root{
+  --acento-noche: #141110;
+  --acento-cal: #F4EEE6;
+  --acento-rojo: #D8231A;
+  --acento-albero: #D9A441;
+  --acento-humo: #8C847C;
+  --acento-mosto: #5E1A22;
+  --acento-azulejo: #2B54A0;
+  --acento-clavel: #E6607E;
+  --acento-olivo: #6E7B3B;
+  --acento-font-sans: 'Instrument Sans', system-ui, sans-serif;
+  --acento-font-emocion: 'Instrument Serif', Georgia, serif;
+  --acento-font-ja: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+  --acento-angle: 23deg;
+  --acento-beat: 333ms; /* 180 bpm */
+}

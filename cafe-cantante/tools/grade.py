@@ -23,6 +23,7 @@ def main():
     ap.add_argument("--grain", type=float, default=4.0)
     ap.add_argument("--contrast", type=float, default=1.12)
     ap.add_argument("--color", action="store_true", help="keep colour (maps), only warm it")
+    ap.add_argument("--brand", action="store_true", help="Acento tritone: noche -> rojo -> cal")
     a = ap.parse_args()
 
     im = Image.open(a.src).convert("RGB")
@@ -31,7 +32,12 @@ def main():
     if a.upscale != 1.0:
         im = im.resize((round(im.width * a.upscale), round(im.height * a.upscale)), Image.LANCZOS)
         im = im.filter(ImageFilter.UnsharpMask(radius=2, percent=70, threshold=2))
-    if a.color:
+    if a.brand:
+        # Acento archive treatment: noche shadows -> rojo mid-tones -> cal highlights, visible grain.
+        g = ImageOps.autocontrast(im.convert("L"), cutoff=0.5)
+        g = ImageEnhance.Contrast(g).enhance(a.contrast)
+        out = ImageOps.colorize(g, (20, 17, 16), (244, 238, 230), mid=(150, 46, 38), blackpoint=18, whitepoint=236, midpoint=112)
+    elif a.color:
         out = ImageEnhance.Color(im).enhance(0.55)
         out = Image.blend(out, Image.new("RGB", out.size, PAPER), 0.08)
     else:

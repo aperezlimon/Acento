@@ -9,7 +9,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 A=assets/audio
-DUR=$(python3 -I -c "import json;print(json.load(open('timings.json'))['duration'])")
+DUR=${FILM_DUR:-$(python3 -I -c "import json;print(json.load(open('timings.json'))['duration'])")}
 # Scene starts for the palmas window (s3 to the end of s6).
 read P0 P1 < <(python3 -I -c "
 import json;s={x['id']:x for x in json.load(open('timings.json'))['scenes']}

@@ -1,37 +1,39 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
-    #s8-print { left: 60px; top: 300px; width: 960px; height: 760px; }
-    #s8-yearbox { left: 96px; top: 880px; width: 480px; height: 220px; }
-    #s8-year { left: 118px; top: 884px; font-size: 210px; line-height: 1.02; color: var(--color-accent); }
-    #s8-pic { left: 0; top: 300px; width: 1080px; height: 672px; }
-    #s8-img { left: 0; top: 0; width: 1080px; height: 672px; }
-    #s8-credit { left: 120px; top: 312px; font-size: 28px; background: rgba(17, 17, 17, 0.8); padding: 4px 12px; }
+    #s8-card { left: 190px; top: 420px; width: 700px; height: 553px; }
+    #s8-num { position: absolute; left: 64px; top: 1000px; font-size: 210px; letter-spacing: -0.05em; white-space: nowrap; }
+    #s8-card2 { left: 64px; top: 420px; width: 952px; height: 592px; }
+    #s8-img2 { object-position: 30% 50%; }
+    #s8-hero { position: absolute; left: 0; width: 1080px; top: 1084px; text-align: center; font-size: 100px; color: var(--acento-cal); }
+    #s8-credit { left: 64px; top: 1026px; }
   </style>
   <div id="root" data-composition-id="s8" data-width="1080" data-height="1920">
-    <div id="s8-print" class="print clip" data-start="0" data-duration="6.746" data-layout-allow-occlusion>
-      <img src="assets/v2/silverio-guitarra.jpg" alt="Silverio Franconetti con la guitarra" />
+    <div id="s8-flash" class="flash clip" data-start="0" data-duration="6.746"></div>
+    <div id="s8-card" class="card cut23 clip" data-start="0" data-duration="3.9">
+      <div id="s8-rv" class="rv"><img src="assets/v3/silverio-guitarra.jpg" alt="Silverio Franconetti con la guitarra" /></div>
     </div>
-    <div id="s8-pic" class="pic clip" data-start="0" data-duration="6.746">
-      <img id="s8-img" src="assets/v2/silla.jpg" alt="Una silla vacía en el tablao de un café cantante, detalle del grabado de José Alarcón" />
+    <div id="s8-num" class="sans clip" data-start="0" data-duration="3.9">1889</div>
+    <div id="s8-card2" class="card clip" data-start="3.6" data-duration="3.146">
+      <div id="s8-rv2" class="rv"><img id="s8-img2" src="assets/v3/silla.jpg" alt="Una silla vacía en el tablao de un café cantante, detalle del grabado de José Alarcón" /></div>
     </div>
-    <div id="s8-credit" class="credit clip" data-start="0" data-duration="6.746">José Alarcón, Un café cantante (detalle)</div>
-    <div id="s8-yearbox" class="box clip" data-start="0" data-duration="6.746"></div>
-    <div id="s8-year" class="head clip" data-start="0" data-duration="6.746">1889</div>
+    <div id="s8-credit" class="credit clip" data-start="3.6" data-duration="3.146">José Alarcón, Un café cantante (detalle)</div>
+    <div id="s8-hero" class="emo clip" data-start="3.6" data-duration="3.146">su silla, <span class="red">vacía</span></div>
   </div>
   <script>
     (function () {
-      var E = window.Ed, F = E.F;
+      var A = window.Acento, F = A.F;
       var tl = gsap.timeline({ paused: true });
-      tl.fromTo("#s8-print", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 8 * F, ease: "power2.out" }, 0);
-      tl.fromTo("#s8-print img", { scale: 1.0 }, { scale: 1.08, duration: 3.8, ease: "sine.inOut" }, 0);
+      A.reveal(tl, "#s8-rv", 0.0);
+      tl.fromTo("#s8-rv img", { scale: 1.0 }, { scale: 1.08, duration: 3.9, ease: "sine.inOut" }, 0);
       // "Silverio murió en mil ochocientos ochenta y nueve."
-      E.wipe(tl, "#s8-yearbox", 1.45, 7 * F);
-      E.wipe(tl, "#s8-year", 1.5, 10 * F);
-      // "Su silla quedó vacía." The engraving's empty stage chair is wiped over him; then silence.
-      E.wipe(tl, "#s8-pic", 3.7, 16 * F);
-      E.drift(tl, "#s8-img", { scale: 1.0, transformOrigin: "36% 45%" }, { scale: 1.22 }, 3.7, 3.05);
-      E.wipe(tl, "#s8-credit", 4.3);
+      A.flash(tl, "#s8-flash", 1.667);
+      A.enter(tl, "#s8-num", 1.667, { from: 0.9 });
+      // "Su silla quedó vacía." Then the music alone.
+      A.reveal(tl, "#s8-rv2", 3.667);
+      tl.fromTo("#s8-img2", { scale: 1.0, transformOrigin: "32% 46%" }, { scale: 1.2, duration: 3.0, ease: "sine.inOut" }, A.snap(3.667));
+      A.write(tl, "#s8-credit", 4.0);
+      A.write(tl, "#s8-hero", 4.333, 12 * F);
       window.__timelines = window.__timelines || {};
       window.__timelines["s8"] = tl;
     })();

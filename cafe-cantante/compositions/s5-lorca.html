@@ -1,45 +1,44 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
-    #s5-print { left: 290px; top: 300px; width: 500px; height: 740px; }
-    #s5-t1 { left: 150px; top: 560px; }
-    #s5-t2 { left: 520px; top: 760px; }
-    #s5-kicker { left: 430px; top: 318px; }
-    #s5-src { left: 430px; top: 372px; font-size: 40px; line-height: 1.18; white-space: normal; width: 460px; }
-    #s5-q { position: absolute; left: 112px; top: 700px; font: 400 200px/1 var(--font-display); color: var(--color-accent); }
-    .s5-line { position: absolute; left: 120px; font: italic 600 74px/1.1 var(--font-body); color: var(--color-paper); white-space: nowrap; }
-    #s5-v1 { top: 850px; }
-    #s5-v2 { top: 950px; }
+    #s5-card { left: 330px; top: 410px; width: 420px; height: 636px; }
+    #s5-pills { left: 0; width: 1080px; top: 1090px; justify-content: center; }
+    #s5-q1 { position: absolute; left: 64px; top: 760px; font-size: 96px; color: var(--acento-cal); white-space: nowrap; }
+    #s5-q2 { position: absolute; left: 64px; top: 862px; font-size: 96px; color: var(--acento-cal); white-space: nowrap; }
+    #s5-q3 { position: absolute; left: 64px; top: 964px; font-size: 96px; color: var(--acento-cal); white-space: nowrap; }
+    #s5-src { position: absolute; left: 310px; top: 560px; }
+    #s5-src2 { position: absolute; left: 310px; top: 606px; font: 500 30px/1 var(--acento-font-sans); color: var(--acento-humo); white-space: nowrap; }
   </style>
   <div id="root" data-composition-id="s5" data-width="1080" data-height="1920">
-    <div id="s5-print" class="print clip" data-start="0" data-duration="8.571">
-      <img src="assets/v2/silverio-retrato.jpg" alt="Retrato de Silverio Franconetti, hacia 1875" />
+    <div id="s5-card" class="card cut23 clip" data-start="0" data-duration="8.571">
+      <div id="s5-rv" class="rv"><img src="assets/v3/silverio-retrato.jpg" alt="Retrato de Silverio Franconetti, hacia 1875" /></div>
     </div>
-    <div id="s5-t1" class="tag clip" data-start="0" data-duration="8.571">Padre italiano</div>
-    <div id="s5-t2" class="tag clip" data-start="0" data-duration="8.571">Madre andaluza</div>
-    <div id="s5-kicker" class="kicker clip" data-start="0" data-duration="8.571">García Lorca</div>
-    <div id="s5-src" class="credit clip" data-start="0" data-duration="8.571">«Retrato de Silverio Franconetti», Poema del cante jondo</div>
-    <div id="s5-q" class="clip" data-start="0" data-duration="8.571">«</div>
-    <div id="s5-v1" class="s5-line clip" data-start="0" data-duration="8.571">La densa miel de Italia</div>
-    <div id="s5-v2" class="s5-line clip" data-start="0" data-duration="8.571">con el <span id="s5-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">limón nuestro»</span></span></div>
+    <div id="s5-pills" class="pills clip" data-start="0" data-duration="8.571">
+      <span id="s5-p1" class="pill">padre italiano</span><span id="s5-p2" class="pill">madre andaluza</span>
+    </div>
+    <div id="s5-q1" class="emo clip" data-start="0" data-duration="8.571">«La densa miel</div>
+    <div id="s5-q2" class="emo clip" data-start="0" data-duration="8.571">de Italia, con el</div>
+    <div id="s5-q3" class="emo clip" data-start="0" data-duration="8.571"><span class="red">limón nuestro</span>»</div>
+    <div id="s5-src" class="lbl clip" data-start="0" data-duration="8.571">Federico García Lorca</div>
+    <div id="s5-src2" class="clip" data-start="0" data-duration="8.571">«Retrato de Silverio Franconetti»</div>
   </div>
   <script>
     (function () {
-      var E = window.Ed, F = E.F;
+      var A = window.Acento, F = A.F;
       var tl = gsap.timeline({ paused: true });
-      tl.fromTo("#s5-print", { opacity: 0, scale: 1.08, rotation: 2 }, { opacity: 1, scale: 1, rotation: -1.5, duration: 8 * F, ease: "back.out(1.5)" }, 0);
-      tl.fromTo("#s5-print img", { scale: 1.06 }, { scale: 1, duration: 4, ease: "sine.out" }, 0);
+      A.reveal(tl, "#s5-rv", 0.0);
+      tl.fromTo("#s5-rv img", { scale: 1.08 }, { scale: 1.0, duration: 3, ease: "sine.out" }, 0);
       // "Hijo de italiano y andaluza."
-      E.tag(tl, "#s5-t1", 0.55);
-      E.tag(tl, "#s5-t2", 1.5);
-      // "Lorca lo resumió así:" the portrait steps aside for the poet's verse.
-      E.clear(tl, ["#s5-t1", "#s5-t2"], 2.3);
-      tl.to("#s5-print", { x: -170, scale: 0.56, rotation: -3, transformOrigin: "0% 0%", duration: 16 * F, ease: "power3.inOut" }, 2.4);
-      E.wipe(tl, ["#s5-kicker", "#s5-src"], 2.85);
-      tl.fromTo("#s5-q", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 7 * F, ease: "back.out(1.6)" }, 4.15);
-      E.wipe(tl, "#s5-v1", 4.38, 16 * F);
-      E.wipe(tl, "#s5-v2", 6.14, 14 * F);
-      E.mark(tl, "#s5-mk", 6.6);
+      A.enter(tl, "#s5-p1", 0.667);
+      A.enter(tl, "#s5-p2", 1.333);
+      // "Lorca lo resumió así:" the portrait steps up and aside for the verse.
+      A.conceal(tl, "#s5-pills", 2.333);
+      tl.to("#s5-card", { x: -266, y: 0, scale: 0.5, transformOrigin: "0% 0%", duration: 14 * F, ease: "power3.inOut" }, A.snap(2.333));
+      A.write(tl, ["#s5-src"], 2.667);
+      A.write(tl, ["#s5-src2"], 3.0);
+      A.write(tl, "#s5-q1", 4.333, 12 * F);
+      A.write(tl, "#s5-q2", 5.0, 14 * F);
+      A.write(tl, "#s5-q3", 6.0, 14 * F);
       window.__timelines = window.__timelines || {};
       window.__timelines["s5"] = tl;
     })();
