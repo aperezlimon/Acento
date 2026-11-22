@@ -1,0 +1,201 @@
+{
+ "duration": 81.884,
+ "scenes": [
+  {
+   "id": "s1",
+   "start": 0.0,
+   "end": 3.469,
+   "vo_start": 0.3,
+   "vo_end": 2.569,
+   "phrases": [
+    {
+     "text": "Hubo un tiempo en que el flamenco no tenía escenario.",
+     "start": 0.3,
+     "end": 2.569
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "start": 3.469,
+   "end": 11.389,
+   "vo_start": 3.869,
+   "vo_end": 10.589,
+   "phrases": [
+    {
+     "text": "Se cantaba en patios, en tabernas,",
+     "start": 3.869,
+     "end": 6.112
+    },
+    {
+     "text": "en fiestas privadas.",
+     "start": 6.332,
+     "end": 7.749
+    },
+    {
+     "text": "Para unos pocos,",
+     "start": 8.169,
+     "end": 9.305
+    },
+    {
+     "text": "y a puerta cerrada.",
+     "start": 9.525,
+     "end": 10.589
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "start": 11.389,
+   "end": 22.112,
+   "vo_start": 14.389,
+   "vo_end": 21.612,
+   "phrases": [
+    {
+     "text": "Hasta que en Sevilla llegaron los cafés cantantes. Mesas, copas, un tablao…",
+     "start": 14.389,
+     "end": 19.271
+    },
+    {
+     "text": "y un público que pagaba por escuchar.",
+     "start": 19.691,
+     "end": 21.612
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "start": 22.112,
+   "end": 31.622,
+   "vo_start": 22.612,
+   "vo_end": 31.022,
+   "phrases": [
+    {
+     "text": "El más famoso estaba en la calle Rosario, número cuatro.",
+     "start": 22.612,
+     "end": 25.888
+    },
+    {
+     "text": "Lo abrió un cantaor en mil ochocientos ochenta y uno: Silverio Franconetti.",
+     "start": 26.308,
+     "end": 31.022
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "start": 31.622,
+   "end": 44.388,
+   "vo_start": 32.822,
+   "vo_end": 42.388,
+   "phrases": [
+    {
+     "text": "Hijo de padre italiano y madre andaluza,",
+     "start": 32.822,
+     "end": 35.314
+    },
+    {
+     "text": "creció en Morón de la Frontera. Lorca escribiría:",
+     "start": 35.534,
+     "end": 38.797
+    },
+    {
+     "text": "la densa miel de Italia,",
+     "start": 39.217,
+     "end": 40.829
+    },
+    {
+     "text": "con el limón nuestro.",
+     "start": 41.049,
+     "end": 42.388
+    }
+   ]
+  },
+  {
+   "id": "s6",
+   "start": 44.388,
+   "end": 52.507,
+   "vo_start": 44.988,
+   "vo_end": 51.907,
+   "phrases": [
+    {
+     "text": "En su café cantaban las grandes figuras de su tiempo.",
+     "start": 44.988,
+     "end": 47.758
+    },
+    {
+     "text": "Y entre el público,",
+     "start": 48.178,
+     "end": 49.302
+    },
+    {
+     "text": "un muchacho de Jerez: Antonio Chacón.",
+     "start": 49.522,
+     "end": 51.907
+    }
+   ]
+  },
+  {
+   "id": "s7",
+   "start": 52.507,
+   "end": 61.832,
+   "vo_start": 55.107,
+   "vo_end": 61.232,
+   "phrases": [
+    {
+     "text": "Fue la Edad de Oro del flamenco.",
+     "start": 55.107,
+     "end": 56.841
+    },
+    {
+     "text": "Los cafés se extendieron por Andalucía,",
+     "start": 57.261,
+     "end": 59.34
+    },
+    {
+     "text": "y el cante se hizo oficio.",
+     "start": 59.56,
+     "end": 61.232
+    }
+   ]
+  },
+  {
+   "id": "s8",
+   "start": 61.832,
+   "end": 73.686,
+   "vo_start": 62.432,
+   "vo_end": 70.086,
+   "phrases": [
+    {
+     "text": "Silverio murió en mil ochocientos ochenta y nueve.",
+     "start": 62.432,
+     "end": 65.72
+    },
+    {
+     "text": "Su silla quedó vacía,",
+     "start": 66.14,
+     "end": 67.425
+    },
+    {
+     "text": "pero el escenario ya no se iba a cerrar.",
+     "start": 67.645,
+     "end": 70.086
+    }
+   ]
+  },
+  {
+   "id": "s9",
+   "start": 73.686,
+   "end": 81.884,
+   "vo_start": 74.486,
+   "vo_end": 77.384,
+   "phrases": [
+    {
+     "text": "Silverio Franconetti le dio al cante un escenario.",
+     "start": 74.486,
+     "end": 77.384
+    }
+   ]
+  }
+ ]
+}

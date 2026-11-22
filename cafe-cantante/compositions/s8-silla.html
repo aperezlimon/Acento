@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s8-cam { position: absolute; inset: 0; }
+    /* The empty stage: a paper spotlight, the boards and the chair. */
+    #s8-light { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #s8-boards { left: -40px; top: 1010px; width: 1160px; height: 190px; }
+    #s8-boards .sheet { background-color: #8a5a35; background-image: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0 140px, rgba(27, 23, 18, 0.55) 140px 146px), url("assets/paper/kraft-fibre.png"); background-blend-mode: normal, multiply; }
+    #s8-chair { position: absolute; left: 380px; top: 520px; width: 320px; height: 560px; filter: drop-shadow(0 6px 0 rgba(27, 23, 18, 0.4)); }
+    #s8-photo { left: 200px; top: 540px; width: 680px; height: 538px; }
+    #s8-year { left: 140px; top: 330px; padding: 18px 30px 2px; }
+    #s8-year .hl { font-size: 200px; }
+  </style>
+  <div id="root" data-composition-id="s8" data-width="1080" data-height="1920">
+    <div id="s8-cam" class="clip" data-start="0" data-duration="11.854">
+      <svg id="s8-light" viewBox="0 0 1080 1920" aria-hidden="true">
+        <polygon id="s8-cone" points="470,0 610,0 900,1110 180,1110" fill="#efe4c8" opacity="0.6" />
+      </svg>
+      <div id="s8-boards" class="card"><div class="sheet" data-torn="81" data-amp="5"></div></div>
+      <!-- A rush-seat chair (silla de anea), cut from dark paper. -->
+      <svg id="s8-chair" viewBox="0 0 320 560" aria-label="Silla de anea vacía">
+        <g fill="#2a2018">
+          <rect x="52" y="0" width="26" height="560" rx="8" />
+          <rect x="242" y="0" width="26" height="560" rx="8" />
+          <rect x="62" y="40" width="196" height="22" rx="6" />
+          <rect x="62" y="110" width="196" height="22" rx="6" />
+          <rect x="62" y="180" width="196" height="22" rx="6" />
+          <rect x="20" y="300" width="280" height="44" rx="10" />
+          <rect x="28" y="330" width="24" height="230" rx="8" />
+          <rect x="268" y="330" width="24" height="230" rx="8" />
+          <rect x="40" y="440" width="240" height="14" rx="6" />
+        </g>
+        <g fill="none" stroke="#8a6a3e" stroke-width="4" opacity="0.9">
+          <path d="M34 312 L286 312 M34 322 L286 322 M34 332 L286 332" />
+        </g>
+      </svg>
+      <div id="s8-photo" class="card"><div class="sheet" data-torn="82" data-amp="1.8"></div><img class="photo" src="assets/ht/silverio-guitarra.png" alt="Silverio Franconetti con la guitarra" /></div>
+      <div id="s8-year" class="card"><div class="sheet" data-torn="83" data-amp="3"></div><div class="hl red">1889</div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var C = window.Collage, F = C.F;
+      C.torn(document.querySelector('[data-composition-id="s8"]'));
+      var tl = gsap.timeline({ paused: true });
+      // The stage is set; Silverio's photograph sits over his chair.
+      C.slap(tl, ["#s8-boards", "#s8-chair"], 0, 0, { from: 1.08, spin: 0 });
+      tl.fromTo("#s8-cone", { opacity: 0 }, { opacity: 0.6, duration: 6 * F, ease: "none" }, 0);
+      C.slap(tl, "#s8-photo", 0.12, -2);
+      // "Silverio murió en mil ochocientos ochenta y nueve."
+      C.slap(tl, "#s8-year", 2.1, -4);
+      // "Su silla quedó vacía": the photograph is peeled off the chair.
+      C.lift(tl, "#s8-photo", 4.25, { y: -520, rot: 12, frames: 16 });
+        // "...pero el escenario ya no se iba a cerrar": the light widens and stays on; then silence.
+      tl.fromTo("#s8-cone", { scaleX: 1, transformOrigin: "50% 0%" }, { scaleX: 1.45, duration: 2.6, ease: "power2.inOut", immediateRender: false }, 5.8);
+      tl.fromTo("#s8-cam", { scale: 1, transformOrigin: "50% 45%" }, { scale: 1.1, duration: 7.4, ease: "sine.inOut" }, 4.0);
+      C.lift(tl, ["#s8-year", "#s8-chair", "#s8-boards"], 11.4, { stagger: 0.03, frames: 12 });
+      tl.to("#s8-cone", { opacity: 0, duration: 10 * F, ease: "none" }, 11.45);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s8"] = tl;
+    })();
+  </script>
+</template>

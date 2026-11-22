@@ -1,0 +1,82 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    /* The café: one long sheet the camera travels across, labels pinned to it. */
+    #s3-cafe { left: 0; top: 480px; width: 1627px; height: 1000px; }
+    #s3-cafe .photo { inset: 18px; width: calc(100% - 36px); height: calc(100% - 36px); }
+    .s3-label { padding: 12px 24px 6px; }
+    .s3-label .hl { font-size: 78px; }
+    #s3-l-mesas { left: 600px; top: 470px; }
+    #s3-l-copas { left: 840px; top: 380px; }
+    #s3-l-tablao { left: 560px; top: 200px; }
+
+    #s3-doors { position: absolute; inset: 0; perspective: 1800px; }
+    .s3-door {
+      position: absolute; top: 0; bottom: 0; width: 540px;
+      background-color: #6e4426;
+      background-image: linear-gradient(90deg, rgba(27, 23, 18, 0.5) 0 10px, rgba(0, 0, 0, 0) 10px calc(100% - 10px), rgba(27, 23, 18, 0.5) calc(100% - 10px)),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0 88px, rgba(27, 23, 18, 0.35) 88px 92px),
+        url("assets/paper/kraft-fibre.png");
+      background-blend-mode: normal, normal, multiply;
+    }
+    #s3-door-l { left: 0; }
+    #s3-door-r { right: 0; }
+    .s3-panel { position: absolute; left: 70px; right: 70px; border: 8px solid rgba(27, 23, 18, 0.7); }
+    .s3-panel.a { top: 300px; height: 560px; }
+    .s3-panel.b { top: 1000px; height: 600px; }
+    .s3-knob { position: absolute; top: 930px; width: 44px; height: 44px; border-radius: 50%; background: #1b1712; }
+    #s3-door-l .s3-knob { right: 34px; }
+    #s3-door-r .s3-knob { left: 34px; }
+    #s3-plaque { left: 610px; top: 520px; padding: 18px 26px 10px; }
+    #s3-plaque .hl { font-size: 84px; text-align: center; }
+
+    #s3-sign { left: 150px; top: 296px; padding: 22px 36px 10px; }
+    #s3-sign .hl { font-size: 128px; }
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1080" data-height="1920">
+    <div id="s3-cafe" class="card clip" data-start="0" data-duration="10.723" style="position:absolute;">
+      <div class="sheet" data-torn="30" data-amp="1"></div>
+      <img class="photo" src="assets/ht/cafe-full.png" alt="Un café cantante, grabado de José Alarcón, hacia 1850" />
+      <div id="s3-l-mesas" class="card s3-label"><div class="sheet" data-torn="31" data-amp="4"></div><div class="hl">MESAS</div></div>
+      <div id="s3-l-copas" class="card s3-label"><div class="sheet" data-torn="32" data-amp="4"></div><div class="hl">COPAS</div></div>
+      <div id="s3-l-tablao" class="card s3-label"><div class="sheet" data-torn="33" data-amp="4"></div><div class="hl">EL TABLAO</div></div>
+    </div>
+
+    <div id="s3-doors" class="clip" data-start="0" data-duration="10.723">
+      <div id="s3-door-l" class="s3-door"><div class="s3-panel a"></div><div class="s3-panel b"></div><div class="s3-knob"></div></div>
+      <div id="s3-door-r" class="s3-door"><div class="s3-panel a"></div><div class="s3-panel b"></div><div class="s3-knob"></div>
+      </div>
+      <div id="s3-plaque" class="card"><div class="sheet" data-torn="34" data-amp="3"></div><div class="hl"><span class="red">ROSARIO</span><br />N.º 4</div></div>
+    </div>
+
+    <div id="s3-sign" class="card clip" data-start="0" data-duration="10.723">
+      <div class="sheet" data-torn="35" data-amp="2.5"></div>
+      <div class="hl">CAFÉ CANTANTE</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var C = window.Collage, F = C.F;
+      C.torn(document.querySelector('[data-composition-id="s3"]'));
+      var tl = gsap.timeline({ paused: true });
+      // Closed doors, the plaque from the ticket on them; they swing open toward the camera.
+      tl.fromTo("#s3-doors", { scale: 1.08 }, { scale: 1, duration: 8 * F, ease: "back.out(1.4)" }, 0);
+      C.slap(tl, "#s3-plaque", 0.12, 3, { frames: 7 });
+      tl.fromTo("#s3-door-l", { rotationY: 0, transformOrigin: "0% 50%" }, { rotationY: -100, duration: 1.9, ease: "power2.inOut" }, 0.55);
+      tl.fromTo("#s3-door-r", { rotationY: 0, transformOrigin: "100% 50%" }, { rotationY: 100, duration: 1.9, ease: "power2.inOut" }, 0.6);
+      tl.fromTo("#s3-doors", { scale: 1 }, { scale: 1.6, immediateRender: false, duration: 1.9, ease: "power2.in" }, 0.55);
+      tl.set("#s3-doors", { opacity: 0 }, 2.5);
+      // One continuous travel through the café, from the tables to the stage.
+      tl.fromTo("#s3-cafe", { x: -547, rotation: 0, scale: 1.12, transformOrigin: "50% 50%" }, { x: -40, rotation: -1, scale: 1, duration: 8.2, ease: "sine.inOut" }, 0.5);
+      C.slap(tl, "#s3-sign", 4.6, -2);
+      C.slap(tl, "#s3-l-mesas", 5.7, -4, { frames: 6 });
+      C.slap(tl, "#s3-l-copas", 6.15, 3, { frames: 6 });
+      C.slap(tl, "#s3-l-tablao", 6.6, -2, { frames: 6 });
+      // Pulled away to the next scene.
+      C.lift(tl, "#s3-sign", 10.15, {});
+      C.lift(tl, "#s3-cafe", 10.22, { y: -420, rot: -5, frames: 14 });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s3"] = tl;
+    })();
+  </script>
+</template>
