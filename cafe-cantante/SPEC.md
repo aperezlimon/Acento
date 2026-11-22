@@ -1,81 +1,57 @@
-# SPEC — «Calle Rosario, 4»
+# SPEC — «Calle Rosario, 4» (versión 2, revista)
 
-GOAL:    que quien lo vea entienda que el café cantante le dio al flamenco un escenario público, y
-         que fue Silverio Franconetti quien lo llevó a su punto más alto; termina con ganas de compartirlo.
-OUTPUT:  HyperFrames, 1080×1920 (9:16, Instagram Reels), 30 fps.
-TIME:    81,9 s × 30 = 2457 frames. La voz marca el tiempo (timings.json).
-VOICE:   Piper (local, gratis), es_ES-davefx-medium, length_scale 1.22. Frases en caché en assets/audio/vo/phrases.
-SAFE:    todo texto entre y 288–1248 px y x 120–888 px (zona libre de Reels). Subtítulos con
-         su borde inferior en y ≤ 1248. Fuera de esa banda solo textura y decoración.
+GOAL:    que quien lo vea entienda que el café cantante le dio al flamenco un escenario
+         público, y que Silverio Franconetti fue su gran figura.
+OUTPUT:  HyperFrames, 1080×1920 (9:16, Reels), 30 fps.
+TIME:    61,4 s × 30 = 1842 frames. La voz marca el tiempo (timings.json).
+VOICE:   Kokoro-82M, voz ef_dora, velocidad 0,92 (tools/build_vo.py, frases en caché).
+MUSIC:   «Soleares», El Mochuelo (CC BY-SA 4.0), en ducking bajo la voz y subiendo en las
+         pausas (tools/mix_music.sh).
+SAFE:    texto entre y 288–1248 y x 120–888; subtítulos con el borde inferior en y 1240.
 
-## LOOK — un cartel de café del siglo XIX recortado y pegado
+## LOOK — reportaje de revista con fotografía de archivo
 
-- **Papel de fondo:** estraza #C9A77C con fibra al 6 % (ruido SVG), sin degradados.
-- **Papel de recorte:** papel de periódico #E6DCC3 en tiras con borde rasgado (máscara SVG
-  irregular, 6–14 px de diente) y sombra de despegue 0 6 px 0 rgba(27,23,18,.35).
-- **Tinta:** #1B1712 en todo texto legible, líneas y grabados.
-- **Acento (rojo albero, #B8432F):** solo en los años (1881, 1889), en la entrada de la calle
-  Rosario y en la frase final. Una sola zona de acento por plano.
-- **Grabados:** imágenes de dominio público pasadas a semitono (puntos de 6 px a 1080) en tinta
-  sobre papel; nunca fotos a color.
-- **Cinta adhesiva:** rectángulos #F2E6C4 al 70 % con bordes dentados, girados ±4–9°.
-- **Tipos:** titulares en League Gothic 400, 150–210 px, tracking +1 %, en mayúsculas, como en
-  los carteles de época; texto y subtítulos en EB Garamond 600, 46 px; años en League Gothic a 260 px.
-- **Luz y profundidad:** sin viñeta ni brillo; 3 capas de papel con parallax 1 : 0.6 : 0.3.
-
-## OBJECTS
-
-- La **entrada / el boleto**: papel rasgado con troquel, «CALLE ROSARIO, 4 · SEVILLA».
-- La **puerta del café**: dos hojas de madera recortadas en papel que se abren hacia la cámara.
-- Las **mesas**: veladores de mármol con copas y humo de papel de seda.
-- El **tablao**: tarima de tablas con una silla de anea y una guitarra.
-- **Silverio**: su fotografía de época (dominio público) en semitono, recortada.
-- **Antonio Chacón**: silueta de muchacho recortada entre el público (sin cara inventada).
-- Los **sellos de ciudades**: el café de Sevilla se encoge hasta ser un sello; se le suman Málaga, Cádiz y Jerez (sustituye al mapa, ver REVIEW.md).
-- La **silla vacía**: la misma silla del tablao, sola, con un foco de papel.
+- **Página:** negro #111111, sin textura.
+- **Fotografía:** imágenes de archivo reales a sangre o en «copia» con marco #F2ECE0 de 18 px
+  y sombra 0 18 px 40 px al 45 %. Virado cálido de dos tintas (#16130F → #EFE6D4) y grano
+  del 3–7 %. Nada de semitono ni de ilustración dibujada.
+- **Titulares:** Archivo Black, 64–100 px, interlineado 1,04, tracking −1,5 %, papel #F2ECE0
+  sobre caja negra.
+- **Resaltado:** barra amarilla albero #F2C230 que se dibuja detrás de una o dos palabras por
+  plano; la palabra pasa a negro.
+- **Antetítulos y etiquetas:** Oswald 600 en mayúsculas, tracking 0,1–0,16 em; etiquetas negras
+  sobre albero.
+- **Anotaciones:** círculos y líneas albero de 7 px que se dibujan sobre la foto.
+- **Citas y créditos:** EB Garamond cursiva, 28–74 px.
+- **Subtítulos:** Montserrat 600, 40 px, papel sobre caja negra al 86 %.
 
 ## MOTION
 
-- Entrada de recortes: «slap» (de escala 1.25 a 1.0 en 8 f, back.out(1.6)); nada aparece con fundido.
-- Movimientos de cámara: power2.inOut, empujes de 60–90 f; la cámara atraviesa las capas de papel
-  (la puerta, las mesas, el humo), nunca corta en seco dentro de la toma continua.
-- Las tiras de texto se «pegan» con un giro de 6° a 0° en 10 f; escalonado de 4 f.
-- Salidas: el papel se levanta y se va de cuadro (y −120 px, rotación 8°, 12 f).
-- Una sola acción protagonista por plano; las secundarias a 50–70 % de recorrido y 3–6 f después.
+- Los titulares se imprimen con un barrido de izquierda a derecha (12 f, power2.out); nunca
+  aparecen con fundido ni suben.
+- Las etiquetas entran con un ligero rebote de escala (6 f, back.out 1.7).
+- Sobre cada foto, la cámara se mueve despacio (sine.inOut, de 1,0 a 1,08–1,22 de escala).
+- Los cortes entre escenas son secos; el ritmo lo marcan la voz y la música.
 
-## SHOTS (guion · ~158 palabras)
+## SHOTS
 
-| # | Frames aprox. | Acción protagonista | Voz |
+| # | Escena | Imagen | Acción |
 |---|---|---|---|
-| 1 | 0–180 | El boleto «CALLE ROSARIO, 4 · SEVILLA» choca contra la cámara (fotograma 0 ya legible). | Hubo un tiempo en que el flamenco no tenía escenario. |
-| 2 | 180–480 | Patio y taberna en grabado; la cámara se asoma por una ventana de papel. | Se cantaba en patios, en tabernas, en fiestas privadas. Para unos pocos, y a puerta cerrada. |
-| 3 | 480–810 | La puerta del café se abre hacia la cámara: mesas, copas, el tablao. | Hasta que en Sevilla llegaron los cafés cantantes. Mesas, copas, un tablao… y un público que pagaba por escuchar. |
-| 4 | 810–1140 | «1881» en rojo se pega; empuje hasta el cartel del café. | El más famoso estaba en la calle Rosario, número cuatro. Lo abrió un cantaor en 1881: Silverio Franconetti. |
-| 5 | 1140–1500 | La foto de Silverio se rasga en dos mitades: Italia / Morón; aparecen los versos de Lorca. | Hijo de padre italiano y madre andaluza, creció en Morón de la Frontera. Lorca escribiría: «la densa miel de Italia con el limón nuestro». |
-| 6 | 1500–1830 | Travelling por el público hasta la silueta del muchacho. | En su café cantaban las grandes figuras de su tiempo. Y entre el público, un muchacho de Jerez: Antonio Chacón. |
-| 7 | 1830–2160 | Zoom fuera: el café se vuelve una chincheta en el mapa; se multiplican. | Fue la Edad de Oro del flamenco. Los cafés se extendieron por Andalucía, y el cante se hizo oficio. |
-| 8 | 2160–2460 | «1889» en rojo; el tablao se vacía, queda la silla. | Silverio murió en 1889. Su silla quedó vacía, pero el escenario ya no se iba a cerrar. |
-| 9 | 2460–2700 | Cierre: la frase final se pega sobre el boleto del principio. | Silverio Franconetti le dio al cante un escenario. |
+| 1 | El flamenco, sin escenario | Beauchy, café cantante, h. 1885 | Portada; el resaltado se dibuja |
+| 2 | Cante para unos pocos | Doré, academia de baile, 1874 | Etiquetas: patios, tabernas, fiestas privadas |
+| 3 | Los cafés cantantes | Beauchy completa | Del tablao al café entero; círculos en mesas, tablao y público |
+| 4 | Calle Rosario, Sevilla · 1881 | Plano de Sevilla, 1868 | El año en albero; entra la copia de Silverio con guitarra |
+| 5 | Lorca | Retrato de Silverio, h. 1875 | Padre italiano / madre andaluza; cita de Lorca |
+| 6 | Las grandes figuras | Público de la foto de Beauchy | Círculo en el público; ficha de Antonio Chacón |
+| 7 | La Edad de Oro | Mapa de Andalucía (es-atlas) | Sevilla, Jerez, Cádiz y Málaga |
+| 8 | 1889 | Silverio → silla vacía del grabado de Alarcón | Barrido a la silla vacía; silencio |
+| 9 | Le dio al cante un escenario | Beauchy (vuelta al principio) | Cierre que se mantiene en pantalla |
 
-Sonido: guitarra por soleá, seca, que entra cuando se abre la puerta (plano 3); palmas solo en el
-tablao (planos 3–6); se queda en silencio en la silla vacía (plano 8) y vuelve para el cierre.
-Fuente de la música: por decidir. Sin fuente gratuita, el reel se entrega solo con voz.
+BANNED: estraza o corcho; puertas y siluetas dibujadas; semitono; imágenes pixeladas o
+ampliadas más de 3,2×; fondo oscuro con elementos pequeños flotando; brillos y partículas;
+todo apareciendo con fundido o subiendo; texto que se mueve mientras se lee; tres tarjetas en
+fila; caras inventadas de personas reales; tópicos de postal (lunares, peinetas, abanicos);
+señalar a una persona concreta de una foto como alguien que no es.
 
-## Datos y su fuente
-
-- Calle Rosario, 4, de Sevilla, 1881: andalucia.org, Expoflamenco (hay fuentes que dan 1870).
-- Padre italiano, madre andaluza, infancia en Morón: andalucia.com, Biografías y Vidas.
-- Muere en 1889: todas las fuentes.
-- El joven Antonio Chacón pasó por su café: andalucia.org.
-- Edad de Oro y declive hacia los teatros en los años veinte: andalucia.org.
-- Versos: Federico García Lorca, «Retrato de Silverio Franconetti», *Poema del cante jondo*
-  (dominio público en España desde 2017).
-
-BANNED: fondo oscuro con elementos flotando; brillos, partículas y destellos; degradados morados o
-azules; papel crema con serif en cursiva y etiquetas en mono; todo centrado; todo apareciendo con
-fundido o subiendo; texto que se mueve mientras se lee; tres tarjetas en fila; caras o fotos
-inventadas de personas reales; banderas o tópicos de postal (lunares, peinetas, abanicos).
-
-QA:      f0 legible como portada; f600 la puerta abierta; f1000 «1881» en rojo; f1300 Silverio
-         partido en dos; f1700 la silueta de Chacón; f2000 el mapa con chinchetas; f2350 la silla
-         vacía; f2650 la frase final. Todo texto dentro de la zona segura de Reels.
+QA:      f0 legible como portada; el resaltado de cada escena; 1881 y 1889 en albero; la cita de
+         Lorca completa; los cuatro puntos del mapa; la silla vacía reconocible.

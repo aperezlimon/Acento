@@ -16,7 +16,6 @@ SKIP = ("densa miel", "limón nuestro")
 SHOW = {
     "mil ochocientos ochenta y uno": "1881",
     "mil ochocientos ochenta y nueve": "1889",
-    "número cuatro": "número 4",
 }
 
 
@@ -49,7 +48,7 @@ def groups(text):
     # Merge one-word or two-word scraps into their neighbour when it stays short.
     merged = []
     for r in out:
-        if merged and (len(r) <= 2 or len(merged[-1]) <= 2) and len(merged[-1]) + len(r) <= MAX_WORDS + 1 and len(" ".join(merged[-1] + r)) <= 30:
+        if merged and not merged[-1][-1].endswith((".", "…")) and (len(r) <= 2 or len(merged[-1]) <= 2) and len(merged[-1]) + len(r) <= MAX_WORDS + 1 and len(" ".join(merged[-1] + r)) <= 30:
             merged[-1] += r
         else:
             merged.append(r)
@@ -92,8 +91,8 @@ def main():
     #root {{ position: absolute; inset: 0; overflow: hidden; pointer-events: none; }}
     /* Bottom of the Reels safe band: the caption's bottom edge sits at y 1240. */
     .cap {{ position: absolute; left: 120px; width: 768px; top: 1120px; height: 120px; display: flex; align-items: flex-end; justify-content: center; }}
-    .cap-t {{ display: inline-block; padding: 8px 20px 6px; background: rgba(27, 23, 18, 0.86); color: #f2ead8;
-      font-family: var(--font-body, "EB Garamond"); font-weight: 600; font-size: 46px; line-height: 1.12; text-align: center; }}
+    .cap-t {{ display: inline-block; padding: 10px 20px 8px; background: rgba(17, 17, 17, 0.86); color: #f2ece0;
+      font-family: "Montserrat"; font-weight: 600; font-size: 40px; line-height: 1.16; text-align: center; }}
   </style>
   <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
 {chr(10).join(rows)}

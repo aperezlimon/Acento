@@ -1,38 +1,32 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
-    #s9-ticket { left: 120px; top: 400px; width: 768px; height: 700px; }
-    #s9-ticket .perf { position: absolute; left: 36px; right: 36px; top: 586px; border-top: 6px dotted rgba(27, 23, 18, 0.55); }
-    #s9-ticket .kicker { position: absolute; left: 60px; top: 60px; font: 600 30px/1 var(--font-body); letter-spacing: 0.22em; color: var(--color-ink); }
-    #s9-ticket .stub { position: absolute; left: 60px; right: 60px; top: 618px; display: flex; justify-content: space-between; font: 600 34px/1 var(--font-body); letter-spacing: 0.16em; color: var(--color-ink); }
-    #s9-line1 { left: 130px; top: 556px; padding: 22px 34px 8px; }
-    #s9-line1 .hl { font-size: 132px; }
-    #s9-line2 { left: 150px; top: 718px; padding: 22px 34px 8px; }
-    #s9-line2 .hl { font-size: 152px; }
-    #s9-sign { left: 170px; top: 906px; padding: 10px 20px 8px; }
-    #s9-sign .tx { font-size: 32px; letter-spacing: 0.06em; }
+    #s9-pic { left: 0; top: 0; width: 1080px; height: 1920px; }
+    #s9-img { left: -740px; top: 0; width: 2458px; height: 1920px; }
+    #s9-box { left: 96px; top: 300px; width: 840px; height: 400px; }
+    #s9-kicker { left: 130px; top: 332px; }
+    #s9-head { left: 130px; top: 386px; width: 780px; font-size: 92px; }
+    #s9-credit { left: 130px; top: 610px; font-size: 30px; }
   </style>
   <div id="root" data-composition-id="s9" data-width="1080" data-height="1920">
-    <div id="s9-ticket" class="card clip" data-layout-allow-occlusion data-start="0" data-duration="8.198">
-      <div class="sheet" data-torn="11" data-amp="1.6"></div>
-      <div class="kicker">ENTRADA · CAFÉ CANTANTE</div>
-      <div class="perf"></div>
-      <div class="stub"><span>N.º 4</span><span>ADMITE UNA</span></div>
+    <div id="s9-pic" class="pic clip" data-start="0" data-duration="5.466">
+      <img id="s9-img" src="assets/v2/beauchy.jpg" alt="El tablao de un café cantante sevillano hacia 1885" />
     </div>
-    <div id="s9-line1" class="card clip" data-start="0" data-duration="8.198"><div class="sheet" data-torn="91" data-amp="3"></div><div class="hl">LE DIO AL CANTE</div></div>
-    <div id="s9-line2" class="card clip" data-start="0" data-duration="8.198"><div class="sheet" data-torn="92" data-amp="3"></div><div class="hl red">UN ESCENARIO</div></div>
-    <div id="s9-sign" class="card clip" data-start="0" data-duration="8.198"><div class="sheet" data-torn="93" data-amp="5"></div><div class="tx">SILVERIO FRANCONETTI · h. 1830 – 1889</div></div>
+    <div id="s9-box" class="box clip" data-start="0" data-duration="5.466"></div>
+    <div id="s9-kicker" class="kicker clip" data-start="0" data-duration="5.466">Silverio Franconetti</div>
+    <div id="s9-head" class="head clip" data-start="0" data-duration="5.466">Le dio al cante<br /><span id="s9-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">un escenario</span></span></div>
+    <div id="s9-credit" class="credit clip" data-start="0" data-duration="5.466">Sevilla, h. 1830 – 1889</div>
   </div>
   <script>
     (function () {
-      var C = window.Collage, F = C.F;
-      C.torn(document.querySelector('[data-composition-id="s9"]'));
+      var E = window.Ed, F = E.F;
       var tl = gsap.timeline({ paused: true });
-      // The ticket from the first frame comes back; the claim is pasted over it, then it holds.
-      C.slap(tl, "#s9-ticket", 0, -4, { from: 1.15, spin: 4 });
-      C.slap(tl, "#s9-line1", 2.0, -2);
-      C.slap(tl, "#s9-line2", 2.9, 2);
-      C.slap(tl, "#s9-sign", 3.7, -1, { frames: 6, from: 1.15, spin: 2 });
+      // Back to the café of the first frame; the claim is printed over it and holds.
+      E.drift(tl, "#s9-img", { scale: 1.12, transformOrigin: "45% 45%" }, { scale: 1.0 }, 0, 5.4);
+      E.wipe(tl, "#s9-box", 0.25, 8 * F);
+      E.wipe(tl, ["#s9-kicker", "#s9-head", "#s9-credit"], 0.35, 14 * F);
+      // "Pero el cante ya tenía escenario."
+      E.mark(tl, "#s9-mk", 1.9);
       window.__timelines = window.__timelines || {};
       window.__timelines["s9"] = tl;
     })();

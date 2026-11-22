@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s2-pic { left: 0; top: 0; width: 1080px; height: 1920px; }
+    #s2-img { left: -183px; top: 0; width: 1446px; height: 1920px; }
+    #s2-box { left: 96px; top: 290px; width: 820px; height: 372px; }
+    #s2-kicker { left: 130px; top: 322px; }
+    #s2-head { left: 130px; top: 376px; width: 760px; font-size: 92px; }
+    #s2-credit { left: 130px; top: 600px; font-size: 28px; }
+    #s2-t1 { left: 150px; top: 760px; }
+    #s2-t2 { left: 560px; top: 860px; }
+    #s2-t3 { left: 230px; top: 990px; }
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1080" data-height="1920">
+    <div id="s2-pic" class="pic clip" data-start="0" data-duration="5.651">
+      <img id="s2-img" src="assets/v2/dore.jpg" alt="Una bailaora entre un corro de hombres en una reunión de baile en Sevilla, grabado de Gustave Doré" />
+    </div>
+    <div id="s2-box" class="box clip" data-start="0" data-duration="5.651"></div>
+    <div id="s2-kicker" class="kicker clip" data-start="0" data-duration="5.651">Antes de los cafés</div>
+    <div id="s2-head" class="head clip" data-start="0" data-duration="5.651">Cante para<br /><span id="s2-mk" class="mk"><span class="mk-bar"></span><span class="mk-t">unos pocos</span></span></div>
+    <div id="s2-credit" class="credit clip" data-start="0" data-duration="5.651">Gustave Doré, academia de baile en Sevilla, 1874</div>
+    <div id="s2-t1" class="tag clip" data-start="0" data-duration="5.651">Patios</div>
+    <div id="s2-t2" class="tag clip" data-start="0" data-duration="5.651">Tabernas</div>
+    <div id="s2-t3" class="tag clip" data-start="0" data-duration="5.651">Fiestas privadas</div>
+  </div>
+  <script>
+    (function () {
+      var E = window.Ed, F = E.F;
+      var tl = gsap.timeline({ paused: true });
+      E.drift(tl, "#s2-img", { scale: 1.1, y: 40, transformOrigin: "50% 60%" }, { scale: 1.0, y: -20 }, 0, 5.65);
+      E.wipe(tl, ["#s2-box"], 0, 8 * F);
+      E.wipe(tl, ["#s2-kicker", "#s2-head", "#s2-credit"], 0.06, 12 * F);
+      // "Se cantaba en patios y tabernas..."
+      E.tag(tl, "#s2-t1", 0.75);
+      E.tag(tl, "#s2-t2", 1.6);
+      // "...para unos pocos, a puerta cerrada."
+      E.mark(tl, "#s2-mk", 2.75);
+      E.tag(tl, "#s2-t3", 4.05);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["s2"] = tl;
+    })();
+  </script>
+</template>

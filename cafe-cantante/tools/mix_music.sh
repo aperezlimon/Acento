@@ -27,7 +27,7 @@ ffmpeg -y -v error \
   -i "$A/mochuelo-soleares-src.wav" -i "$A/narration.wav" "${PALMAS_IN[@]}" \
   -filter_complex "
     [0:a]aresample=44100,aformat=channel_layouts=stereo,atrim=${OFFSET}:$(python3 -I -c "print($OFFSET+$DUR)"),asetpts=N/SR/TB,
-         highpass=f=90,loudnorm=I=-20:TP=-3:LRA=11,volume=0.9,
+         highpass=f=90,loudnorm=I=-20:TP=-3:LRA=11,volume=1.3,
          afade=t=in:d=1.2,afade=t=out:st=$(python3 -I -c "print($DUR-3)"):d=3[mus];
     [1:a]aresample=44100,aformat=channel_layouts=stereo,apad,atrim=0:${DUR}[vo];
     ${PALMAS_CHAIN};

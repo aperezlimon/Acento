@@ -1,50 +1,44 @@
-# Revisión — «Calle Rosario, 4»
+# Revisión — «Calle Rosario, 4», versión 2
 
-Reel vertical 1080×1920 a 30 fps, 81,9 s, 9 escenas. Narración en español con la voz Piper
-`es_ES-davefx-medium`. Historia A de `STORYLINES.md`; las otras dos (B «Entre italiano y flamenco»
-y C «Del patio al teatro») no se han construido.
+Reel vertical 1080×1920 a 30 fps, 61,4 s, 9 escenas. Narración con Kokoro (voz Dora) y
+música de fondo de El Mochuelo. Rehecho a partir de las notas sobre la versión 1: voz Kokoro,
+imágenes en alta definición, sin fondo de estraza ni puertas dibujadas, estilo de reportaje de
+revista y unos 60 s.
 
 ## Decisiones creativas
 
-- **Collage de cartel de café del siglo XIX:** estraza, recortes de periódico, cinta adhesiva,
-  y grabados y fotos de época pasados a semitono de una sola tinta. El rojo albero queda
-  reservado para los años, la calle Rosario y la frase final.
-- **Imágenes reales de dominio público** en lugar de ilustraciones: la escena de Doré, el café
-  de Alarcón y las dos fotos de Silverio. Para Chacón uso una silueta recortada, porque no hay
-  imagen suya en el café y no quería inventarle una cara.
-- **Escena 7:** el mapa de Andalucía del SPEC se convirtió en sellos con nombres de ciudades.
-  Un contorno de mapa dibujado a mano habría quedado poco fiable.
-- **Duración:** 82 s y no 90. La voz dura 57 s; los respiros (la puerta, el desgarro, el mapa,
-  la silla vacía y el cierre) llevan el resto. Ralentizar más la voz la hacía sonar pesada.
+- **Fotografía de archivo real como protagonista.** La foto de Emilio Beauchy de un café
+  cantante sevillano (h. 1885) abre, explica y cierra la pieza. El grabado de Doré, el de
+  Alarcón, las dos fotos de Silverio y el plano de Sevilla de 1868 cubren el resto.
+- **Lenguaje de revista:** página negra, titulares en Archivo Black sobre caja, una o dos
+  palabras resaltadas en amarillo albero por plano, etiquetas y círculos sobre las fotos,
+  créditos en cursiva.
+- **Guion recortado a 9 frases.** La historia es la misma que en la versión 1.
+- **Chacón sin cara:** la escena señala al público en general, no a una persona concreta,
+  y da su nombre y fechas. No hay foto suya en el café y su retrato no se pudo descargar
+  (Wikimedia devolvió 429).
+- **Silla vacía:** es la silla real del tablao del grabado de Alarcón, con su crédito.
+  Ilustra la frase; no es la silla de Silverio.
+- **Mapa de Andalucía** con datos geográficos reales (es-atlas), no dibujado a mano.
 
 ## Qué se midió y qué solo se miró
 
-- `hyperframes check --safe-zone reels`: sin errores de lint, ejecución, audio ni contraste
-  graves. Quedan 3 avisos de oclusión entre recortes girados, que en los fotogramas se leen
-  enteros; los marqué con `data-layout-allow-occlusion`.
-- Snapshots de cada escena, de cada corte (±0,2 s) y en ancho de móvil (360 px). Todo el
-  texto se lee a 360 px.
-- **El sonido no lo ha escuchado nadie:** la voz se generó y midió, pero no se oyó. La música
-  aún no está mezclada (ver abajo).
+- `hyperframes check --safe-zone reels`: ok. Queda un aviso de contraste que dura 3
+  fotogramas, mientras una palabra resaltada cambia de color.
+- Snapshots de las 9 escenas y de los momentos clave; las imágenes se leen nítidas.
+- **Audio medido, no escuchado:** la música queda entre 12 y 17 dB por debajo de la voz
+  mientras se habla y sube a unos −31 dBFS en las pausas y a −25 dBFS en el cierre.
 
 ## Puntos débiles
 
-- **Escena 3:** la puerta es un plano marrón muy plano durante 0,5 s antes de abrirse.
-  Con más tiempo le daría textura de madera y un cartel en el dintel.
-- **Escena 6:** la silueta de Chacón es esquemática; funciona como recorte, pero es la imagen
-  menos rica de la película.
-- **Subtítulos:** cuatro de los 36 grupos pasan de 30 caracteres y ocupan dos líneas.
+- Las dos fotos de Silverio son originales muy pequeños (165×250 y 449×355). Están
+  ampliadas con grano de copia antigua y se ven blandas comparadas con la de Beauchy.
+- La grabación de El Mochuelo tiene cante, no solo guitarra. Bajo la voz suena como el
+  ambiente del café, pero si molesta habría que buscar una pista solo de guitarra.
+- No hay efectos de sonido.
 
-## Avisos que mantengo a propósito
+## Pendiente o posible
 
-- `duplicate_media_discovery_risk`: la escena 5 usa la misma foto dos veces para las dos
-  mitades del retrato rasgado.
-- `timeline_track_too_dense` en `captions.html`: el archivo de subtítulos tiene 36 grupos.
-- `outside_safe_zone` solo para TikTok: el reel está compuesto para la zona segura de Reels.
-
-## Pendiente
-
-- **Música:** «Soleares por El Mochuelo» (CC BY-SA 4.0) y unas palmas (CC0) de Wikimedia
-  Commons. `upload.wikimedia.org` responde 429 a las descargas de audio. Cuando estén en
-  `assets/audio/`, ejecuta `tools/mix_music.sh` y añade
-  `<audio id="musica" src="assets/audio/musica.wav" ...>` a `index.html`.
+- El retrato de Antonio Chacón (`Chacon 03.jpg` en Commons), si Wikimedia deja de bloquear.
+- Unas palmas de fondo en las escenas del café (`tools/mix_music.sh` ya las mezcla si existe
+  `assets/audio/palmas-src.ogg`).

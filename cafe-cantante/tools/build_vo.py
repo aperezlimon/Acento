@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build the narration track and its timing map from assets/audio/vo/guion.txt.
 
-Each scene line is split into phrases; every phrase is synthesised with Piper
-so its start and end on the timeline are exact (they drive captions and cues).
+Each scene line is split into phrases; every phrase is synthesised (Kokoro by
+default, or Piper) so its start and end on the timeline are exact (they drive
+captions and cues). Phrases are cached, so a rebuild keeps the same audio.
 
 Output:
   assets/audio/narration.wav   the whole voice track, scenes placed on the timeline
   timings.json                 scenes and phrases with start/end in seconds
 
-Usage: python3 tools/build_vo.py [--model PATH] [--length-scale 1.22]
+Usage: python3 tools/build_vo.py [--engine kokoro|piper] [--voice ef_dora] [--speed 0.92]
 """
 import argparse
 import json
@@ -19,12 +20,12 @@ import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SR = 22050
+SR = 24000  # set per engine in main()
 
 # Per scene: silence before the voice starts, and hold after it ends (seconds).
-LEAD = [0.3, 0.4, 3.0, 0.5, 1.2, 0.6, 2.6, 0.6, 0.8]
-TAIL = [0.9, 0.8, 0.5, 0.6, 2.0, 0.6, 0.6, 3.6, 4.5]
-GAP_COMMA, GAP_STOP = 0.22, 0.42
+LEAD = [0.2, 0.3, 1.2, 0.3, 0.3, 0.3, 0.8, 0.3, 0.5]
+TAIL = [0.5, 0.4, 0.4, 0.4, 1.1, 0.4, 0.5, 1.4, 2.8]
+GAP_COMMA, GAP_STOP = 0.16, 0.32
 
 
 def phrases(line):
@@ -43,6 +44,31 @@ def phrases(line):
 
 
 CACHE = ROOT / "assets/audio/vo/phrases"
+
+
+_KOKORO = None
+KOKORO_DIR = Path.home() / ".cache/hyperframes/tts"
+
+
+def synth_kokoro(text, voice, speed):
+    """Kokoro-82M via kokoro_onnx (the model hyperframes tts downloads)."""
+    global _KOKORO
+    import hashlib
+    import numpy as np
+    key = hashlib.sha1(f"kokoro|{voice}|{speed}|{text}".encode()).hexdigest()[:16]
+    cached = CACHE / f"{key}.wav"
+    if not cached.exists():
+        if _KOKORO is None:
+            from kokoro_onnx import Kokoro
+            _KOKORO = Kokoro(str(KOKORO_DIR / "models/kokoro-v1.0.onnx"), str(KOKORO_DIR / "voices/voices-v1.0.bin"))
+        audio, sr = _KOKORO.create(text, voice=voice, speed=speed, lang="es")
+        assert sr == SR, sr
+        pcm = (np.clip(audio, -1, 1) * 32767).astype("<i2").tobytes()
+        CACHE.mkdir(parents=True, exist_ok=True)
+        with wave.open(str(cached), "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm)
+    with wave.open(str(cached)) as w:
+        return w.readframes(w.getnframes())
 
 
 def synth(text, model, ls, dest):
@@ -87,7 +113,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default=str(Path.home() / ".cache/piper/es_ES-davefx-medium.onnx"))
     ap.add_argument("--length-scale", type=float, default=1.22)
+    ap.add_argument("--engine", choices=["kokoro", "piper"], default="kokoro")
+    ap.add_argument("--voice", default="ef_dora")
+    ap.add_argument("--speed", type=float, default=0.92)
     args = ap.parse_args()
+    global SR
+    SR = 24000 if args.engine == "kokoro" else 22050
 
     lines = [l.strip() for l in (ROOT / "assets/audio/vo/guion.txt").read_text().splitlines() if l.strip()]
     assert len(lines) == len(LEAD), f"{len(lines)} lines, {len(LEAD)} scenes"
@@ -101,7 +132,11 @@ def main():
             t += LEAD[i]
             ph = []
             for j, p in enumerate(phrases(line)):
-                pcm = trim(synth(p, args.model, args.length_scale, Path(tmp) / f"{i}_{j}.wav"))
+                if args.engine == "kokoro":
+                    raw = synth_kokoro(p, args.voice, args.speed)
+                else:
+                    raw = synth(p, args.model, args.length_scale, Path(tmp) / f"{i}_{j}.wav")
+                pcm = trim(raw)
                 d = len(pcm) / 2 / SR
                 ph.append({"text": p, "start": round(t, 3), "end": round(t + d, 3)})
                 track += pcm
