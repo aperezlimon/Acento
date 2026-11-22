@@ -3,8 +3,8 @@
 GOAL:    que quien lo vea entienda que el café cantante le dio al flamenco un escenario público, y
          que fue Silverio Franconetti quien lo llevó a su punto más alto; termina con ganas de compartirlo.
 OUTPUT:  HyperFrames, 1080×1920 (9:16, Instagram Reels), 30 fps.
-TIME:    ~90 s × 30 = ~2700 frames. La voz marca el tiempo; la duración final la da la narración.
-VOICE:   Piper (local, gratis); voz por confirmar. Velocidad ~0.9 (length_scale 1.1).
+TIME:    81,9 s × 30 = 2457 frames. La voz marca el tiempo (timings.json).
+VOICE:   Piper (local, gratis), es_ES-davefx-medium, length_scale 1.22. Frases en caché en assets/audio/vo/phrases.
 SAFE:    todo texto entre y 288–1248 px y x 120–888 px (zona libre de Reels). Subtítulos con
          su borde inferior en y ≤ 1248. Fuera de esa banda solo textura y decoración.
 
@@ -31,7 +31,7 @@ SAFE:    todo texto entre y 288–1248 px y x 120–888 px (zona libre de Reels)
 - El **tablao**: tarima de tablas con una silla de anea y una guitarra.
 - **Silverio**: su fotografía de época (dominio público) en semitono, recortada.
 - **Antonio Chacón**: silueta de muchacho recortada entre el público (sin cara inventada).
-- El **mapa de Andalucía**: recorte con chinchetas rojas que se multiplican.
+- Los **sellos de ciudades**: el café de Sevilla se encoge hasta ser un sello; se le suman Málaga, Cádiz y Jerez (sustituye al mapa, ver REVIEW.md).
 - La **silla vacía**: la misma silla del tablao, sola, con un foco de papel.
 
 ## MOTION
